@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Robot protypes and inheritance</title>
+        <script>
+            // Created a Game object constructor
+            function Game() {
+                this.level = 0;
+            }
+            // Created the game object prototype
+            Game.prototype.play = function() {
+                this.level++;
+                console.log("Welcome to level " + this.level);
+                this.unlock();
+            }
+            // Inside this Game object prototype I am adding to the Robot prototype a method unlocked at level 42.
+            Game.prototype.unlock = function() {
+                if (this.level >= 42) {
+                    Robot.prototype.deployLaser = function() {
+                        console.log(this.name + " is beaming laser at you.");
+                    }
+                };
+            }
+            // Created the Robot constructor above is the Robot prototype which gets created as soon as the Player reached level 42.
+            function Robot(params) {
+                this.name = params.name;
+                this.year = params.year;
+                this.owner = params.owner;
+            }
+
+            // It's time to create some Robot and game instances. To start the game play.
+            var game = new Game();
+            var c3poParams = {
+                name: "C3po",
+                year: 2090,
+                owner: "Matthaios Stioukis"
+            };
+            var r2d2Params = {
+                name: "R2d2",
+                year: 2075,
+                owner: "Matthaios Stioukis"
+            };
+            var c3po = new Robot(c3poParams);
+            var r2d2 = new Robot(r2d2Params);
+
+            while (game.level < 42) {
+                game.play();
+            }
+            c3po.deployLaser();
+            r2d2.deployLaser();
+
+        </script>
+    </head>
+    <body>
+        <h1>In this chapter I am learning about prototypes and their benefits.</h1>
+    </body>
+</html>
